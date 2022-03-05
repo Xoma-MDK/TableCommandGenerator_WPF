@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icons8-вставить-таблицу-96.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons8-вставить-таблицу-96.png" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+﻿<Window x:Class="TableCommandGenerator_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TableCommandGenerator_WPF"
+        mc:Ignorable="d"
+        Title="Генератор команд для таблиц" Height="215" Width="425" ResizeMode="CanResize" WindowStyle="ThreeDBorderWindow" Icon="/icons8-вставить-таблицу-96.png">
+    <Grid Margin="0,0,0,2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="154*"/>
+            <ColumnDefinition Width="271*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Название таблицы" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+        <Label Content="Диапазон" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <Label Content="Адрес ячейки &quot;ID&quot;" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+        <Label Content="Количество записей" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="nameTable" HorizontalAlignment="Left" Margin="116,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" Grid.Column="1"/>
+        <TextBox x:Name="indexArray" HorizontalAlignment="Left" Margin="116,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" Grid.Column="1"/>
+        <TextBox x:Name="indexId" HorizontalAlignment="Left" Margin="116,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" Grid.Column="1"/>
+        <TextBox x:Name="namberOfNotes" HorizontalAlignment="Left" Margin="116,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" Grid.Column="1"/>
+        <Button Content="Сгенерировать" HorizontalAlignment="Left" Margin="116,134,0,0" VerticalAlignment="Top" Width="127" Click="Button_Click" Grid.Column="1"/>
+        <RichTextBox x:Name="OutputTextBox" Margin="10,134,0,10" HorizontalAlignment="Left" Width="240" Grid.ColumnSpan="2">
+            <FlowDocument>
+                <Paragraph>
+                    <Run/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </Grid>
+</Window>
