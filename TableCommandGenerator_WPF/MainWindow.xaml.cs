@@ -59,7 +59,7 @@ namespace TableCommandGenerator_WPF
                 
                 OutputTextBox.AppendText(answer);
 
-            }
+            }//dfdf
             else
             {
                 MessageBox.Show(
