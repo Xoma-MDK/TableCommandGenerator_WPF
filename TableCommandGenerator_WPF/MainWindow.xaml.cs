@@ -27,25 +27,61 @@ namespace TableCommandGenerator_WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            OutputTextBox.Document.Blocks.Clear();
             if (nameTable.Text != "" && indexArray.Text != "" && indexId.Text != "")
             {
-                String answer;
-                answer = $"=ВЫБОР({indexId.Text};";
+                string mode = commandSelecter.Text;
+                String answer = "";
                 int indexStart = int.Parse(indexArray.Text.Split(':')[0].Split(' ')[1]);
-                for (int i = indexStart; i <= int.Parse(namberOfNotes.Text) + indexStart; i++)
-                {
-                    if (i != int.Parse(namberOfNotes.Text) + indexStart && !nameTable.Text.Contains(' '))
-                        answer += $"TEXTJOIN(\" \"; ИСТИНА; {nameTable.Text}!{indexArray.Text.Split(':')[0].Split(' ')[0]}{i}:{indexArray.Text.Split(':')[1].Split(' ')[0]}{i});";
-                    if (i == int.Parse(namberOfNotes.Text) + indexStart && !nameTable.Text.Contains(' '))
-                        answer += $"TEXTJOIN(\" \"; ИСТИНА;{nameTable.Text}!{indexArray.Text.Split(':')[0].Split(' ')[0]}{i}:{indexArray.Text.Split(':')[1].Split(' ')[0]}{i}))";
-                    if (i != int.Parse(namberOfNotes.Text) + indexStart && nameTable.Text.Contains(' '))
-                        answer += $"TEXTJOIN(\" \"; ИСТИНА; '{nameTable.Text}'!{indexArray.Text.Split(':')[0].Split(' ')[0]}{i}:{indexArray.Text.Split(':')[1].Split(' ')[0]}{i});";
-                    if (i == int.Parse(namberOfNotes.Text) + indexStart && nameTable.Text.Contains(' '))
-                        answer += $"TEXTJOIN(\" \"; ИСТИНА;'{nameTable.Text}'!{indexArray.Text.Split(':')[0].Split(' ')[0]}{i}:{indexArray.Text.Split(':')[1].Split(' ')[0]}{i}))";
+                switch (mode){
+                    case "ВПР":
+                        answer += $"=ВПР({indexId.Text};'{nameTable.Text}'!$A${indexArray.Text.Split(':')[0].Split(' ')[1]}:${indexArray.Text.Split(':')[1].Split(' ')[0]}${int.Parse(namberOfNotes.Text) + indexStart - 1};{int.Parse(namberOfColums.Text)};ЛОЖЬ)";
+                        break;
+                    case "ВЫБОР":
 
+
+                        answer += $"=ВЫБОР({indexId.Text};";
+                        for (int i = indexStart; i <= int.Parse(namberOfNotes.Text) + indexStart; i++)
+                        {
+                            if (i != int.Parse(namberOfNotes.Text) + indexStart && !nameTable.Text.Contains(' '))
+                                answer += $"TEXTJOIN(\" \"; ИСТИНА; {nameTable.Text}!{indexArray.Text.Split(':')[0].Split(' ')[0]}{i}:{indexArray.Text.Split(':')[1].Split(' ')[0]}{i});";
+                            if (i == int.Parse(namberOfNotes.Text) + indexStart && !nameTable.Text.Contains(' '))
+                                answer += $"TEXTJOIN(\" \"; ИСТИНА;{nameTable.Text}!{indexArray.Text.Split(':')[0].Split(' ')[0]}{i}:{indexArray.Text.Split(':')[1].Split(' ')[0]}{i}))";
+                            if (i != int.Parse(namberOfNotes.Text) + indexStart && nameTable.Text.Contains(' '))
+                                answer += $"TEXTJOIN(\" \"; ИСТИНА; '{nameTable.Text}'!{indexArray.Text.Split(':')[0].Split(' ')[0]}{i}:{indexArray.Text.Split(':')[1].Split(' ')[0]}{i});";
+                            if (i == int.Parse(namberOfNotes.Text) + indexStart && nameTable.Text.Contains(' '))
+                                answer += $"TEXTJOIN(\" \"; ИСТИНА;'{nameTable.Text}'!{indexArray.Text.Split(':')[0].Split(' ')[0]}{i}:{indexArray.Text.Split(':')[1].Split(' ')[0]}{i}))";
+
+                        }
+                        break;
                 }
+
+                
                 OutputTextBox.AppendText(answer);
 
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Не все поля заполнены!",
+                    "Ошибка"
+                    );
+            }
+        }
+
+        private void namberOfNotes_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!((e.Key.GetHashCode() >= 34) && (e.Key.GetHashCode() <= 43)) && !((e.Key.GetHashCode() >= 74) && (e.Key.GetHashCode() <= 83)))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void namberOfColums_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!((e.Key.GetHashCode() >= 34) && (e.Key.GetHashCode() <= 43)) && !((e.Key.GetHashCode() >= 74) && (e.Key.GetHashCode() <= 83)))
+            {
+                e.Handled = true;
             }
         }
     }
